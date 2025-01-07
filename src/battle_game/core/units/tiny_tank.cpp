@@ -3,6 +3,7 @@
 #include "battle_game/core/bullets/bullets.h"
 #include "battle_game/core/game_core.h"
 #include "battle_game/graphics/graphics.h"
+#include<random>
 
 namespace battle_game::unit {
 
@@ -80,7 +81,11 @@ void Tank::Render() {
 }
 
 void Tank::Update() {
-  TankMove(3.0f, glm::radians(180.0f));
+  std::random_device rd;  
+  std::mt19937 gen(rd()); 
+  std::uniform_real_distribution<> dis(1.0, 10.0); 
+  float random_float = dis(gen);
+  TankMove(1.0f*random_float, glm::radians(10.0f*random_float));
   TurretRotate();
   Fire();
 }
@@ -157,10 +162,10 @@ bool Tank::IsHit(glm::vec2 position) const {
 }
 
 const char *Tank::UnitName() const {
-  return "Tiny Tank";
+  return "random Tank";
 }
 
 const char *Tank::Author() const {
-  return "LazyJazz";
+  return "baoqihao";
 }
 }  // namespace battle_game::unit
